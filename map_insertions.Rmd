@@ -1,0 +1,68 @@
+---
+title: "Map"
+author: "TMJ"
+date: "Tuesday, March 03, 2015"
+output: html_document
+---
+
+Load necessary packages
+
+```{r}
+library(ggplot2)
+library(ggmap)
+```
+
+Create data frame with data
+
+```{r, echo=FALSE}
+setwd("~/Box Sync/Landrace/results/map_ZmCCT_11apr2017")
+passport <- read.csv("~/Box Sync/Landrace/results/map_ZmCCT_11apr2017/MITEmap.csv")
+str(passport)
+```
+
+Get the map
+```{r}
+mapLRS <- get_map(location = c(lon = -mean(passport$Longitude), lat = 10), zoom = 3, maptype = "terrain", scale = 2)
+```
+
+add points on map
+
+```{r}
+map <- ggmap(mapLRS) +
+  geom_point(data = passport, aes(x = -Longitude, y = Latitude, fill = freq_MITE, alpha = 0.8), size = 3, shape = 21) +
+  guides(alpha=FALSE, size=FALSE)
+map2 <- map + scale_fill_gradient(low="blue", high="orange", name ="Frequency of MITE insertion at Vgt1")
+map2
+```
+
+save image to file
+
+```{r}
+setwd("~/Box Sync/Landrace/results/map_ZmCCT_11apr2017")
+ggsave(map2, file="map_MITE.pdf", width = 14, height = 8)
+```
+
+For CACTA
+
+```{r, echo=FALSE}
+setwd("~/Box Sync/Landrace/results/map_ZmCCT_11apr2017")
+passportCACTA <- read.csv("~/Box Sync/Landrace/results/map_ZmCCT_11apr2017/Insertionsmap.csv")
+str(passportCACTA)
+```
+
+```{r}
+mapLRS_CACTA <- get_map(location = c(lon = -mean(passportCACTA$Longitude), lat = 10), zoom = 3, maptype = "terrain", scale = 2)
+```
+
+```{r}
+map_CACTA <- ggmap(mapLRS_CACTA) +
+  geom_point(data = passportCACTA, aes(x = -Longitude, y = Latitude, fill = freq_CACTA, alpha = 0.8), size = 3, shape = 21) +
+  guides(alpha=FALSE, size=FALSE)
+map_CACTA2 <- map_CACTA + scale_fill_gradient(low="blue", high="orange", name ="Frequency of CACTA insertion at ZmCCT")
+map_CACTA2
+```
+
+```{r}
+setwd("~/Box Sync/Landrace/results/map_ZmCCT_11apr2017")
+ggsave(map_CACTA2, file="map_CACTA.pdf", width = 14, height = 8)
+```
