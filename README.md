@@ -16,8 +16,9 @@ hwe.rmd is a dependent file for the hwe filter
 downstream analysis has code for figures in plos one 2017 paper
 
 
-##Converting sample names
-Before you run the script, make a copy of the target vcf file and call it {}_rename.vcf. This script will overwrite the vcf!
+**Converting sample names**
+Before you run the script, make a copy of the target vcf file and call it file_rename.vcf. 
+This script will overwrite the vcf!
 In order to change the sample names from DNA id to accession id use the following code:
 python src/rename.py -VCF data/GBS/vcf_files/combined_rename.vcf -DICT data/GBS_dict.txt 
 
