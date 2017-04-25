@@ -1,0 +1,107 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Getting insert data formatted for TASSEL- works with VCF not HAPMAP.
+
+```{r}
+setwd("~/Box Sync/Landrace/workdir")
+library("reshape2", lib.loc="/Library/Frameworks/R.framework/Versions/3.3/Resources/library")
+library(plyr)
+library(stringr)
+insert <- read.csv("Insertion_data.csv")
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+```{r}
+insert1 <- insert[,c(3,11:15,17:21)]
+insertmelt <- melt(insert1, id=c("COLLECTION"))
+insertmelt <- rename(insertmelt, c("value"="genotype"))
+insertmelt <- rename(insertmelt, c("variable"="locus"))
+insertmelt$plant_id <- str_sub(insertmelt$locus, -1, -1)
+insertmelt$sample_id <- paste(insertmelt$COLLECTION, "_", insertmelt$plant_id)
+insertmelt <- insertmelt[,c(1,2,3,5)]
+```
+
+subset by locus
+```{r}
+CACTA <- insertmelt[grep("CACTA", insertmelt$locus), ]
+CACTA <- rename(CACTA, c("genotype"="CACTA"))
+MITE <- insertmelt[grep("MITE", insertmelt$locus), ]
+MITE <- rename(MITE, c("genotype"="MITE"))
+hap <- merge(CACTA, MITE, by="sample_id")
+hap <- hap[,c(1,4,7)]
+hap <- na.omit(hap)
+```
+
+
+```{r}
+hap$CACTA <- gsub("-1", "./.", hap$CACTA)
+hap$MITE <- gsub("-1", "./.", hap$MITE)
+hap$CACTA <- gsub("1", "0/1", hap$CACTA)
+hap$CACTA <- gsub("2", "1/1", hap$CACTA)
+hap$CACTA <- gsub("0", "0/0", hap$CACTA)
+hap$MITE <- gsub("1", "0/1", hap$MITE)
+hap$MITE <- gsub("2", "1/1", hap$MITE)
+hap$MITE <- gsub("0", "0/0", hap$MITE)
+
+
+```
+
+
+```{r}
+header <- c('alleles', 'chrom', 'pos', 'strand', 'assembly#', 'center', 'protLSID', 'assayLSID', 'panel', 'QCcode')
+header <- as.data.frame(header)
+header$CACTA <- ""
+header$MITE <- ""
+header <- rename(header, c("header"="sample_id"))
+hapm <- rbind(header, hap)
+hapm <- rename(hapm, c("sample_id"="rs"))
+```
+
+transpose
+```{r}
+hapmap <- t(hapm)
+hapmap <- as.data.frame(hapmap)
+colnames(hapmap) = hapmap[1, ]
+#hapmap = hapmap[-1, ]
+```
+
+
+
+```{r}
+#write.table(hapmap, file="hapmap_letters.txt", sep = "\t")
+```
+
+
+
+
+for vcf- THIS WORKED FOR INPUT INTO TASSEL! 
+
+```{r}
+headervcf <- c('CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO', 'FORMAT')
+headervcf <- as.data.frame(headervcf)
+headervcf$CACTA <- ""
+headervcf$MITE <- ""
+headervcf <- rename(headervcf, c("headervcf"="sample_id"))
+vcf <- rbind(headervcf, hap)
+vcf <- rename(vcf, c("sample_id"="ID"))
+```
+
+transpose
+```{r}
+vcffile <- t(vcf)
+vcffile <- as.data.frame(vcffile)
+colnames(vcffile) = vcffile[1, ]
+#hapmap = hapmap[-1, ]
+```
+
+
+
+```{r}
+write.table(vcffile, file="vcffile_letters.txt", sep = "\t")
+```
+```
+
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
