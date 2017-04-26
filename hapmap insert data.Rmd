@@ -38,10 +38,10 @@ hap <- na.omit(hap)
 ```{r}
 hap$CACTA <- gsub("-1", "./.", hap$CACTA)
 hap$MITE <- gsub("-1", "./.", hap$MITE)
-hap$CACTA <- gsub("1", "0/1", hap$CACTA)
+hap$CACTA <- gsub("1", "1/0", hap$CACTA)
 hap$CACTA <- gsub("2", "1/1", hap$CACTA)
 hap$CACTA <- gsub("0", "0/0", hap$CACTA)
-hap$MITE <- gsub("1", "0/1", hap$MITE)
+hap$MITE <- gsub("1", "1/0", hap$MITE)
 hap$MITE <- gsub("2", "1/1", hap$MITE)
 hap$MITE <- gsub("0", "0/0", hap$MITE)
 
