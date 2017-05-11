@@ -1,0 +1,106 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+#install.packages("qqman")
+library(qqman)
+setwd("~/Box Sync/Landrace/workdir")
+a <- read.delim("MLM_ALT.txt", header=T, sep = "\t")
+a$p <- gsub("NaN", "NA", a$p)
+a$Marker <- gsub("NaN", "NA", a$Marker)
+a$Chr <- gsub("NaN", "NA", a$Chr)
+a$Pos <- gsub("NaN", "NA", a$Pos)
+a$p <- as.numeric(a$p)
+a$Chr <- as.numeric(a$Chr)
+a$Pos <- as.numeric(a$Pos)
+a <- a[,c("Chr", "Pos", "Marker", "p")]
+a <- a[complete.cases(a),]
+```
+
+```{r}
+#install.packages("qqman")
+library(qqman)
+setwd("~/Box Sync/Landrace/workdir")
+p <- read.delim("MLM_POL.txt", header=T, sep = "\t")
+p$p <- gsub("NaN", "NA", p$p)
+p$Marker <- gsub("NaN", "NA", p$Marker)
+p$Chr <- gsub("NaN", "NA", p$Chr)
+p$Pos <- gsub("NaN", "NA", p$Pos)
+p$p <- as.numeric(p$p)
+p$Chr <- as.numeric(p$Chr)
+p$Pos <- as.numeric(p$Pos)
+p <- p[,c("Chr", "Pos", "Marker", "p")]
+p <- p[complete.cases(p),]
+```
+
+```{r}
+
+setwd("~/Box Sync/Landrace/workdir")
+s <- read.delim("MLM_SILK.txt", header=T, sep = "\t")
+s$p <- gsub("NaN", "NA", s$p)
+s$Marker <- gsub("NaN", "NA", s$Marker)
+s$Chr <- gsub("NaN", "NA", s$Chr)
+s$Pos <- gsub("NaN", "NA", s$Pos)
+s$p <- as.numeric(s$p)
+s$Chr <- as.numeric(s$Chr)
+s$Pos <- as.numeric(s$Pos)
+s <- s[,c("Chr", "Pos", "Marker", "p")]
+s <- s[complete.cases(s),]
+```
+
+
+```{r}
+
+setwd("~/Box Sync/Landrace/workdir")
+l <- read.delim("MLM_LG.txt", header=T, sep = "\t")
+l$p <- gsub("NaN", "NA", l$p)
+l$Marker <- gsub("NaN", "NA", l$Marker)
+l$Chr <- gsub("NaN", "NA", l$Chr)
+l$Pos <- gsub("NaN", "NA", l$Pos)
+l$p <- as.numeric(l$p)
+l$Chr <- as.numeric(l$Chr)
+l$Pos <- as.numeric(l$Pos)
+l <- l[,c("Chr", "Pos", "Marker", "p")]
+l <- l[complete.cases(l),]
+```
+
+```{r}
+#install.packages("qqman")
+library(qqman)
+setwd("~/Box Sync/Landrace/workdir")
+lc <- read.delim("MLM_LG_no canada.txt", header=T, sep = "\t")
+lc$p <- gsub("NaN", "NA", lc$p)
+lc$Marker <- gsub("NaN", "NA", lc$Marker)
+lc$Chr <- gsub("NaN", "NA", lc$Chr)
+lc$Pos <- gsub("NaN", "NA", lc$Pos)
+lc$p <- as.numeric(lc$p)
+lc$Chr <- as.numeric(lc$Chr)
+lc$Pos <- as.numeric(lc$Pos)
+lc <- lc[,c("Chr", "Pos", "Marker", "p")]
+lc <- lc[complete.cases(lc),]
+```
+
+
+```{r}
+par(mfrow = c(1, 1))
+manhattan(a,chr = "Chr",bp = "Pos",p = "p", snp = "Marker", suggestiveline=FALSE, genomewideline = FALSE)
+manhattan(l,chr = "Chr",bp = "Pos",p = "p", snp = "Marker", highlight = c("CACTA","MITE","PZE1094084245","PZE1094084256"), suggestiveline=FALSE, genomewideline = FALSE)
+manhattan(lc,chr = "Chr",bp = "Pos",p = "p", snp = "Marker", highlight = c("CACTA","MITE","PZE1094084245","PZE1094084256"), suggestiveline=FALSE, genomewideline = FALSE)
+manhattan(p,chr = "Chr",bp = "Pos",p = "p", snp = "Marker", suggestiveline=FALSE, genomewideline = FALSE)
+manhattan(s,chr = "Chr",bp = "Pos",p = "p", snp = "Marker", suggestiveline=FALSE, genomewideline = FALSE)
+#symbols()
+#chr = "CHR", bp = "BP", p = "P", snp = "SNP",
+#col = c("gray10", "gray60"), chrlabs = NULL,
+#suggestiveline = -log10(1e-05), genomewideline = -log10(5e-08),
+#highlight = NULL, logp = TRUE, ...
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
