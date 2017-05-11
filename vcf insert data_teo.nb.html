@@ -142,7 +142,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("hapmap insert data.Rmd");
+  window.initializeSourceEmbed("vcf insert data_teo.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
@@ -175,23 +175,29 @@ $(document).ready(function () {
 <p>Getting insert data formatted for TASSEL- works with VCF not HAPMAP.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmxpYnJhcnkoXCJyZXNoYXBlMlwiLCBsaWIubG9jPVwiL0xpYnJhcnkvRnJhbWV3b3Jrcy9SLmZyYW1ld29yay9WZXJzaW9ucy8zLjMvUmVzb3VyY2VzL2xpYnJhcnlcIilcbmxpYnJhcnkocGx5cilcbmxpYnJhcnkoc3RyaW5ncilcbmluc2VydCA8LSByZWFkLmNzdihcIkluc2VydGlvbl9kYXRhLmNzdlwiKVxuYGBgIn0= -->
-<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)
-library(&quot;reshape2&quot;, lib.loc=&quot;/Library/Frameworks/R.framework/Versions/3.3/Resources/library&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmBgYCJ9 -->
+<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy90amFtYW5uL0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIgaW5zaWRlIGEgbm90ZWJvb2sgY2h1bmsuIFRoZSB3b3JraW5nIGRpcmVjdG9yeSB3aWxsIGJlIHJlc2V0IHdoZW4gdGhlIGNodW5rIGlzIGZpbmlzaGVkIHJ1bm5pbmcuIFVzZSB0aGUga25pdHIgcm9vdC5kaXIgb3B0aW9uIGluIHRoZSBzZXR1cCBjaHVuayB0byBjaGFuZ2UgdGhlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>The working directory was changed to /Users/tjamann/Box Sync/Landrace/workdir inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInJlc2hhcGUyXCIsIGxpYi5sb2M9XCIvTGlicmFyeS9GcmFtZXdvcmtzL1IuZnJhbWV3b3JrL1ZlcnNpb25zLzMuMy9SZXNvdXJjZXMvbGlicmFyeVwiKVxubGlicmFyeShwbHlyKVxubGlicmFyeShzdHJpbmdyKVxuaW5zZXJ0IDwtIHJlYWQuY3N2KFwiSW5zZXJ0aW9uX2RhdGFfdGVvLmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>library(&quot;reshape2&quot;, lib.loc=&quot;/Library/Frameworks/R.framework/Versions/3.3/Resources/library&quot;)
 library(plyr)
 library(stringr)
-insert &lt;- read.csv(&quot;Insertion_data.csv&quot;)</code></pre>
+insert &lt;- read.csv(&quot;Insertion_data_teo.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Cmd+Option+I</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zZXJ0MSA8LSBpbnNlcnRbLGMoMywxMToxNSwxNzoyMSldXG5pbnNlcnRtZWx0IDwtIG1lbHQoaW5zZXJ0MSwgaWQ9YyhcIkNPTExFQ1RJT05cIikpXG5pbnNlcnRtZWx0IDwtIHJlbmFtZShpbnNlcnRtZWx0LCBjKFwidmFsdWVcIj1cImdlbm90eXBlXCIpKVxuaW5zZXJ0bWVsdCA8LSByZW5hbWUoaW5zZXJ0bWVsdCwgYyhcInZhcmlhYmxlXCI9XCJsb2N1c1wiKSlcbmluc2VydG1lbHQkcGxhbnRfaWQgPC0gc3RyX3N1YihpbnNlcnRtZWx0JGxvY3VzLCAtMSwgLTEpXG5pbnNlcnRtZWx0JHNhbXBsZV9pZCA8LSBwYXN0ZShpbnNlcnRtZWx0JENPTExFQ1RJT04sIFwiX1wiLCBpbnNlcnRtZWx0JHBsYW50X2lkKVxuaW5zZXJ0bWVsdCA8LSBpbnNlcnRtZWx0WyxjKDEsMiwzLDUpXVxuYGBgIn0= -->
-<pre class="r"><code>insert1 &lt;- insert[,c(3,11:15,17:21)]
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zZXJ0MSA8LSBpbnNlcnRbLGMoMyw1OjI0KV1cbmluc2VydG1lbHQgPC0gbWVsdChpbnNlcnQxLCBpZD1jKFwiQ09MTEVDVElPTlwiKSlcbmluc2VydG1lbHQgPC0gcmVuYW1lKGluc2VydG1lbHQsIGMoXCJ2YWx1ZVwiPVwiZ2Vub3R5cGVcIikpXG5pbnNlcnRtZWx0IDwtIHJlbmFtZShpbnNlcnRtZWx0LCBjKFwidmFyaWFibGVcIj1cImxvY3VzXCIpKVxuaW5zZXJ0bWVsdCA8LSBpbnNlcnRtZWx0W2NvbXBsZXRlLmNhc2VzKGluc2VydG1lbHQpLF1cbmluc2VydG1lbHQkcGxhbnRfaWQgPC0gc3RyX3N1YihpbnNlcnRtZWx0JGxvY3VzLCAtMSwgLTEpXG5pbnNlcnRtZWx0JHNhbXBsZV9pZCA8LSBwYXN0ZShpbnNlcnRtZWx0JENPTExFQ1RJT04sIFwiX1wiLCBpbnNlcnRtZWx0JHBsYW50X2lkKVxuaW5zZXJ0bWVsdCA8LSBpbnNlcnRtZWx0WyxjKDEsMiwzLDUpXVxuYGBgIn0= -->
+<pre class="r"><code>insert1 &lt;- insert[,c(3,5:24)]
 insertmelt &lt;- melt(insert1, id=c(&quot;COLLECTION&quot;))
 insertmelt &lt;- rename(insertmelt, c(&quot;value&quot;=&quot;genotype&quot;))
 insertmelt &lt;- rename(insertmelt, c(&quot;variable&quot;=&quot;locus&quot;))
+insertmelt &lt;- insertmelt[complete.cases(insertmelt),]
 insertmelt$plant_id &lt;- str_sub(insertmelt$locus, -1, -1)
 insertmelt$sample_id &lt;- paste(insertmelt$COLLECTION, &quot;_&quot;, insertmelt$plant_id)
 insertmelt &lt;- insertmelt[,c(1,2,3,5)]</code></pre>
@@ -214,43 +220,20 @@ hap &lt;- na.omit(hap)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGFwJENBQ1RBIDwtIGdzdWIoXCItMVwiLCBcIi4vLlwiLCBoYXAkQ0FDVEEpXG5oYXAkTUlURSA8LSBnc3ViKFwiLTFcIiwgXCIuLy5cIiwgaGFwJE1JVEUpXG5oYXAkQ0FDVEEgPC0gZ3N1YihcIjFcIiwgXCIxLzBcIiwgaGFwJENBQ1RBKVxuaGFwJENBQ1RBIDwtIGdzdWIoXCIyXCIsIFwiMS8xXCIsIGhhcCRDQUNUQSlcbmhhcCRDQUNUQSA8LSBnc3ViKFwiMFwiLCBcIjAvMFwiLCBoYXAkQ0FDVEEpXG5oYXAkTUlURSA8LSBnc3ViKFwiMVwiLCBcIjEvMFwiLCBoYXAkTUlURSlcbmhhcCRNSVRFIDwtIGdzdWIoXCIyXCIsIFwiMS8xXCIsIGhhcCRNSVRFKVxuaGFwJE1JVEUgPC0gZ3N1YihcIjBcIiwgXCIwLzBcIiwgaGFwJE1JVEUpXG5cblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGFwJENBQ1RBIDwtIGdzdWIoXCItMVwiLCBcIi4vLlwiLCBoYXAkQ0FDVEEpXG5oYXAkTUlURSA8LSBnc3ViKFwiLTFcIiwgXCIuLy5cIiwgaGFwJE1JVEUpXG5oYXAkQ0FDVEEgPC0gZ3N1YihcIjBcIiwgXCIwLzBcIiwgaGFwJENBQ1RBKVxuaGFwJENBQ1RBIDwtIGdzdWIoXCIxXCIsIFwiMS8wXCIsIGhhcCRDQUNUQSlcbmhhcCRDQUNUQSA8LSBnc3ViKFwiMlwiLCBcIjEvMVwiLCBoYXAkQ0FDVEEpXG5oYXAkTUlURSA8LSBnc3ViKFwiMFwiLCBcIjAvMFwiLCBoYXAkTUlURSlcbmhhcCRNSVRFIDwtIGdzdWIoXCIxXCIsIFwiMS8wXCIsIGhhcCRNSVRFKVxuaGFwJE1JVEUgPC0gZ3N1YihcIjJcIiwgXCIxLzFcIiwgaGFwJE1JVEUpXG5gYGAifQ== -->
 <pre class="r"><code>hap$CACTA &lt;- gsub(&quot;-1&quot;, &quot;./.&quot;, hap$CACTA)
 hap$MITE &lt;- gsub(&quot;-1&quot;, &quot;./.&quot;, hap$MITE)
+hap$CACTA &lt;- gsub(&quot;0&quot;, &quot;0/0&quot;, hap$CACTA)
 hap$CACTA &lt;- gsub(&quot;1&quot;, &quot;1/0&quot;, hap$CACTA)
 hap$CACTA &lt;- gsub(&quot;2&quot;, &quot;1/1&quot;, hap$CACTA)
-hap$CACTA &lt;- gsub(&quot;0&quot;, &quot;0/0&quot;, hap$CACTA)
-hap$MITE &lt;- gsub(&quot;1&quot;, &quot;1/0&quot;, hap$MITE)
-hap$MITE &lt;- gsub(&quot;2&quot;, &quot;1/1&quot;, hap$MITE)
 hap$MITE &lt;- gsub(&quot;0&quot;, &quot;0/0&quot;, hap$MITE)
-</code></pre>
+hap$MITE &lt;- gsub(&quot;1&quot;, &quot;1/0&quot;, hap$MITE)
+hap$MITE &lt;- gsub(&quot;2&quot;, &quot;1/1&quot;, hap$MITE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZGVyIDwtIGMoJ2FsbGVsZXMnLCAnY2hyb20nLCAncG9zJywgJ3N0cmFuZCcsICdhc3NlbWJseSMnLCAnY2VudGVyJywgJ3Byb3RMU0lEJywgJ2Fzc2F5TFNJRCcsICdwYW5lbCcsICdRQ2NvZGUnKVxuaGVhZGVyIDwtIGFzLmRhdGEuZnJhbWUoaGVhZGVyKVxuaGVhZGVyJENBQ1RBIDwtIFwiXCJcbmhlYWRlciRNSVRFIDwtIFwiXCJcbmhlYWRlciA8LSByZW5hbWUoaGVhZGVyLCBjKFwiaGVhZGVyXCI9XCJzYW1wbGVfaWRcIikpXG5oYXBtIDwtIHJiaW5kKGhlYWRlciwgaGFwKVxuaGFwbSA8LSByZW5hbWUoaGFwbSwgYyhcInNhbXBsZV9pZFwiPVwicnNcIikpXG5gYGAifQ== -->
-<pre class="r"><code>header &lt;- c('alleles', 'chrom', 'pos', 'strand', 'assembly#', 'center', 'protLSID', 'assayLSID', 'panel', 'QCcode')
-header &lt;- as.data.frame(header)
-header$CACTA &lt;- &quot;&quot;
-header$MITE &lt;- &quot;&quot;
-header &lt;- rename(header, c(&quot;header&quot;=&quot;sample_id&quot;))
-hapm &lt;- rbind(header, hap)
-hapm &lt;- rename(hapm, c(&quot;sample_id&quot;=&quot;rs&quot;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>transpose</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGFwbWFwIDwtIHQoaGFwbSlcbmhhcG1hcCA8LSBhcy5kYXRhLmZyYW1lKGhhcG1hcClcbmNvbG5hbWVzKGhhcG1hcCkgPSBoYXBtYXBbMSwgXVxuI2hhcG1hcCA9IGhhcG1hcFstMSwgXVxuYGBgIn0= -->
-<pre class="r"><code>hapmap &lt;- t(hapm)
-hapmap &lt;- as.data.frame(hapmap)
-colnames(hapmap) = hapmap[1, ]
-#hapmap = hapmap[-1, ]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
+<p>for hapmap</p>
+<p>header &lt;- c(‘alleles’, ‘chrom’, ‘pos’, ‘strand’, ‘assembly#’, ‘center’, ‘protLSID’, ‘assayLSID’, ‘panel’, ‘QCcode’) header &lt;- as.data.frame(header) header<span class="math inline">\(CACTA &lt;- &quot;&quot; header\)</span>MITE &lt;- “” header &lt;- rename(header, c(“header”=“sample_id”)) hapm &lt;- rbind(header, hap) hapm &lt;- rename(hapm, c(“sample_id”=“rs”)) hapmap &lt;- t(hapm) hapmap &lt;- as.data.frame(hapmap) colnames(hapmap) = hapmap[1, ] #hapmap = hapmap[-1, ]</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3dyaXRlLnRhYmxlKGhhcG1hcCwgZmlsZT1cImhhcG1hcF9sZXR0ZXJzLnR4dFwiLCBzZXAgPSBcIlxcdFwiKVxuYGBgIn0= -->
@@ -285,16 +268,170 @@ colnames(vcffile) = vcffile[1, ]
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud3JpdGUudGFibGUodmNmZmlsZSwgZmlsZT1cInZjZmZpbGVfbGV0dGVycy50eHRcIiwgc2VwID0gXCJcXHRcIilcbmBgYCJ9 -->
-<pre class="r"><code>write.table(vcffile, file=&quot;vcffile_letters.txt&quot;, sep = &quot;\t&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmBgYCJ9 -->
+<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy90amFtYW5uL0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIgaW5zaWRlIGEgbm90ZWJvb2sgY2h1bmsuIFRoZSB3b3JraW5nIGRpcmVjdG9yeSB3aWxsIGJlIHJlc2V0IHdoZW4gdGhlIGNodW5rIGlzIGZpbmlzaGVkIHJ1bm5pbmcuIFVzZSB0aGUga25pdHIgcm9vdC5kaXIgb3B0aW9uIGluIHRoZSBzZXR1cCBjaHVuayB0byBjaGFuZ2UgdGhlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>The working directory was changed to /Users/tjamann/Box Sync/Landrace/workdir inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud3JpdGUudGFibGUodmNmZmlsZSwgZmlsZT1cInZjZmZpbGVfdGVvcy50eHRcIiwgc2VwID0gXCJcXHRcIilcbmBgYCJ9 -->
+<pre class="r"><code>write.table(vcffile, file=&quot;vcffile_teos.txt&quot;, sep = &quot;\t&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>```</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
+<p>for the landrace data:</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmBgYCJ9 -->
+<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy90amFtYW5uL0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIgaW5zaWRlIGEgbm90ZWJvb2sgY2h1bmsuIFRoZSB3b3JraW5nIGRpcmVjdG9yeSB3aWxsIGJlIHJlc2V0IHdoZW4gdGhlIGNodW5rIGlzIGZpbmlzaGVkIHJ1bm5pbmcuIFVzZSB0aGUga25pdHIgcm9vdC5kaXIgb3B0aW9uIGluIHRoZSBzZXR1cCBjaHVuayB0byBjaGFuZ2UgdGhlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>The working directory was changed to /Users/tjamann/Box Sync/Landrace/workdir inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInJlc2hhcGUyXCIsIGxpYi5sb2M9XCIvTGlicmFyeS9GcmFtZXdvcmtzL1IuZnJhbWV3b3JrL1ZlcnNpb25zLzMuMy9SZXNvdXJjZXMvbGlicmFyeVwiKVxubGlicmFyeShwbHlyKVxubGlicmFyeShzdHJpbmdyKVxuaW5zZXJ0IDwtIHJlYWQuY3N2KFwiSW5zZXJ0aW9uX2RhdGEuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>library(&quot;reshape2&quot;, lib.loc=&quot;/Library/Frameworks/R.framework/Versions/3.3/Resources/library&quot;)
+library(plyr)
+library(stringr)
+insert &lt;- read.csv(&quot;Insertion_data.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zZXJ0MSA8LSBpbnNlcnRbLGMoMywxMToxNSwxNzoyMSldXG5pbnNlcnRtZWx0IDwtIG1lbHQoaW5zZXJ0MSwgaWQ9YyhcIkNPTExFQ1RJT05cIikpXG5pbnNlcnRtZWx0IDwtIHJlbmFtZShpbnNlcnRtZWx0LCBjKFwidmFsdWVcIj1cImdlbm90eXBlXCIpKVxuaW5zZXJ0bWVsdCA8LSByZW5hbWUoaW5zZXJ0bWVsdCwgYyhcInZhcmlhYmxlXCI9XCJsb2N1c1wiKSlcbmluc2VydG1lbHQgPC0gaW5zZXJ0bWVsdFtjb21wbGV0ZS5jYXNlcyhpbnNlcnRtZWx0KSxdXG5pbnNlcnRtZWx0JHBsYW50X2lkIDwtIHN0cl9zdWIoaW5zZXJ0bWVsdCRsb2N1cywgLTEsIC0xKVxuaW5zZXJ0bWVsdCRzYW1wbGVfaWQgPC0gcGFzdGUoaW5zZXJ0bWVsdCRDT0xMRUNUSU9OLCBcIl9cIiwgaW5zZXJ0bWVsdCRwbGFudF9pZClcbmluc2VydG1lbHQgPC0gaW5zZXJ0bWVsdFssYygxLDIsMyw1KV1cbmBgYCJ9 -->
+<pre class="r"><code>insert1 &lt;- insert[,c(3,11:15,17:21)]
+insertmelt &lt;- melt(insert1, id=c(&quot;COLLECTION&quot;))
+insertmelt &lt;- rename(insertmelt, c(&quot;value&quot;=&quot;genotype&quot;))
+insertmelt &lt;- rename(insertmelt, c(&quot;variable&quot;=&quot;locus&quot;))
+insertmelt &lt;- insertmelt[complete.cases(insertmelt),]
+insertmelt$plant_id &lt;- str_sub(insertmelt$locus, -1, -1)
+insertmelt$sample_id &lt;- paste(insertmelt$COLLECTION, &quot;_&quot;, insertmelt$plant_id)
+insertmelt &lt;- insertmelt[,c(1,2,3,5)]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>subset by locus</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ0FDVEEgPC0gaW5zZXJ0bWVsdFtncmVwKFwiQ0FDVEFcIiwgaW5zZXJ0bWVsdCRsb2N1cyksIF1cbkNBQ1RBIDwtIHJlbmFtZShDQUNUQSwgYyhcImdlbm90eXBlXCI9XCJDQUNUQVwiKSlcbk1JVEUgPC0gaW5zZXJ0bWVsdFtncmVwKFwiTUlURVwiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXVxuTUlURSA8LSByZW5hbWUoTUlURSwgYyhcImdlbm90eXBlXCI9XCJNSVRFXCIpKVxuaGFwIDwtIG1lcmdlKENBQ1RBLCBNSVRFLCBieT1cInNhbXBsZV9pZFwiKVxuaGFwIDwtIGhhcFssYygxLDQsNyldXG5oYXAgPC0gbmEub21pdChoYXApXG5gYGAifQ== -->
+<pre class="r"><code>CACTA &lt;- insertmelt[grep(&quot;CACTA&quot;, insertmelt$locus), ]
+CACTA &lt;- rename(CACTA, c(&quot;genotype&quot;=&quot;CACTA&quot;))
+MITE &lt;- insertmelt[grep(&quot;MITE&quot;, insertmelt$locus), ]
+MITE &lt;- rename(MITE, c(&quot;genotype&quot;=&quot;MITE&quot;))
+hap &lt;- merge(CACTA, MITE, by=&quot;sample_id&quot;)
+hap &lt;- hap[,c(1,4,7)]
+hap &lt;- na.omit(hap)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGFwJENBQ1RBIDwtIGdzdWIoXCItMVwiLCBcIi4vLlwiLCBoYXAkQ0FDVEEpXG5oYXAkTUlURSA8LSBnc3ViKFwiLTFcIiwgXCIuLy5cIiwgaGFwJE1JVEUpXG5oYXAkQ0FDVEEgPC0gZ3N1YihcIjBcIiwgXCIwLzBcIiwgaGFwJENBQ1RBKVxuaGFwJENBQ1RBIDwtIGdzdWIoXCIxXCIsIFwiMS8wXCIsIGhhcCRDQUNUQSlcbmhhcCRDQUNUQSA8LSBnc3ViKFwiMlwiLCBcIjEvMVwiLCBoYXAkQ0FDVEEpXG5oYXAkTUlURSA8LSBnc3ViKFwiMFwiLCBcIjAvMFwiLCBoYXAkTUlURSlcbmhhcCRNSVRFIDwtIGdzdWIoXCIxXCIsIFwiMS8wXCIsIGhhcCRNSVRFKVxuaGFwJE1JVEUgPC0gZ3N1YihcIjJcIiwgXCIxLzFcIiwgaGFwJE1JVEUpXG5gYGAifQ== -->
+<pre class="r"><code>hap$CACTA &lt;- gsub(&quot;-1&quot;, &quot;./.&quot;, hap$CACTA)
+hap$MITE &lt;- gsub(&quot;-1&quot;, &quot;./.&quot;, hap$MITE)
+hap$CACTA &lt;- gsub(&quot;0&quot;, &quot;0/0&quot;, hap$CACTA)
+hap$CACTA &lt;- gsub(&quot;1&quot;, &quot;1/0&quot;, hap$CACTA)
+hap$CACTA &lt;- gsub(&quot;2&quot;, &quot;1/1&quot;, hap$CACTA)
+hap$MITE &lt;- gsub(&quot;0&quot;, &quot;0/0&quot;, hap$MITE)
+hap$MITE &lt;- gsub(&quot;1&quot;, &quot;1/0&quot;, hap$MITE)
+hap$MITE &lt;- gsub(&quot;2&quot;, &quot;1/1&quot;, hap$MITE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>for hapmap</p>
+<p>header &lt;- c(‘alleles’, ‘chrom’, ‘pos’, ‘strand’, ‘assembly#’, ‘center’, ‘protLSID’, ‘assayLSID’, ‘panel’, ‘QCcode’) header &lt;- as.data.frame(header) header<span class="math inline">\(CACTA &lt;- &quot;&quot; header\)</span>MITE &lt;- “” header &lt;- rename(header, c(“header”=“sample_id”)) hapm &lt;- rbind(header, hap) hapm &lt;- rename(hapm, c(“sample_id”=“rs”)) hapmap &lt;- t(hapm) hapmap &lt;- as.data.frame(hapmap) colnames(hapmap) = hapmap[1, ] #hapmap = hapmap[-1, ]</p>
+<div id="write.tablehapmap-filehapmap_letters.txt-sep" class="section level1">
+<h1>write.table(hapmap, file=“hapmap_letters.txt”, sep = “”)</h1>
+<p>for vcf- THIS WORKED FOR INPUT INTO TASSEL!</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZGVydmNmIDwtIGMoJyNDSFJPTScsICdQT1MnLCAnSUQnLCAnUkVGJywgJ0FMVCcsICdRVUFMJywgJ0ZJTFRFUicsICdJTkZPJywgJ0ZPUk1BVCcpXG5oZWFkZXJ2Y2YgPC0gYXMuZGF0YS5mcmFtZShoZWFkZXJ2Y2YpXG5oZWFkZXJ2Y2YkQ0FDVEEgPC0gXCJcIlxuaGVhZGVydmNmJE1JVEUgPC0gXCJcIlxuaGVhZGVydmNmIDwtIHJlbmFtZShoZWFkZXJ2Y2YsIGMoXCJoZWFkZXJ2Y2ZcIj1cInNhbXBsZV9pZFwiKSlcbnZjZiA8LSByYmluZChoZWFkZXJ2Y2YsIGhhcClcbnZjZiA8LSByZW5hbWUodmNmLCBjKFwic2FtcGxlX2lkXCI9XCJJRFwiKSlcbmBgYCJ9 -->
+<pre class="r"><code>headervcf &lt;- c('#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO', 'FORMAT')
+headervcf &lt;- as.data.frame(headervcf)
+headervcf$CACTA &lt;- &quot;&quot;
+headervcf$MITE &lt;- &quot;&quot;
+headervcf &lt;- rename(headervcf, c(&quot;headervcf&quot;=&quot;sample_id&quot;))
+vcf &lt;- rbind(headervcf, hap)
+vcf &lt;- rename(vcf, c(&quot;sample_id&quot;=&quot;ID&quot;))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>transpose</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmNmZmlsZSA8LSB0KHZjZilcbnZjZmZpbGUgPC0gYXMuZGF0YS5mcmFtZSh2Y2ZmaWxlKVxuY29sbmFtZXModmNmZmlsZSkgPSB2Y2ZmaWxlWzEsIF1cbiNoYXBtYXAgPSBoYXBtYXBbLTEsIF1cbmBgYCJ9 -->
+<pre class="r"><code>vcffile &lt;- t(vcf)
+vcffile &lt;- as.data.frame(vcffile)
+colnames(vcffile) = vcffile[1, ]
+#hapmap = hapmap[-1, ]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmBgYCJ9 -->
+<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy90amFtYW5uL0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIgaW5zaWRlIGEgbm90ZWJvb2sgY2h1bmsuIFRoZSB3b3JraW5nIGRpcmVjdG9yeSB3aWxsIGJlIHJlc2V0IHdoZW4gdGhlIGNodW5rIGlzIGZpbmlzaGVkIHJ1bm5pbmcuIFVzZSB0aGUga25pdHIgcm9vdC5kaXIgb3B0aW9uIGluIHRoZSBzZXR1cCBjaHVuayB0byBjaGFuZ2UgdGhlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>The working directory was changed to /Users/tjamann/Box Sync/Landrace/workdir inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud3JpdGUudGFibGUodmNmZmlsZSwgZmlsZT1cInZjZmZpbGVfbGFuZHJhY2VzLnR4dFwiLCBzZXAgPSBcIlxcdFwiKVxuYGBgIn0= -->
+<pre class="r"><code>write.table(vcffile, file=&quot;vcffile_landraces.txt&quot;, sep = &quot;\t&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>after fix up the files</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmBgYCJ9 -->
+<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy90amFtYW5uL0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIgaW5zaWRlIGEgbm90ZWJvb2sgY2h1bmsuIFRoZSB3b3JraW5nIGRpcmVjdG9yeSB3aWxsIGJlIHJlc2V0IHdoZW4gdGhlIGNodW5rIGlzIGZpbmlzaGVkIHJ1bm5pbmcuIFVzZSB0aGUga25pdHIgcm9vdC5kaXIgb3B0aW9uIGluIHRoZSBzZXR1cCBjaHVuayB0byBjaGFuZ2UgdGhlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>The working directory was changed to /Users/tjamann/Box Sync/Landrace/workdir inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbmFtcGxpc2VxIDwtIHJlYWRfZGVsaW0oXCJzb3J0ZWR0YXNzZWxfcmVuYW1lNE1heS50eHRcIiwgXCJcXHRcIiwgZXNjYXBlX2RvdWJsZSA9IEZBTFNFLCB0cmltX3dzID0gVFJVRSlcbmBgYCJ9 -->
+<pre class="r"><code>library(readr)
+ampliseq &lt;- read_delim(&quot;sortedtassel_rename4May.txt&quot;, &quot;\t&quot;, escape_double = FALSE, trim_ws = TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICAuZGVmYXVsdCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYCNDSFJPTWAgPSBjb2xfaW50ZWdlcigpLFxuICBQT1MgPSBjb2xfaW50ZWdlcigpXG4pXG5TZWUgc3BlYyguLi4pIGZvciBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9ucy5cbiJ9 -->
+<pre><code>Parsed with column specification:
+cols(
+  .default = col_character(),
+  `#CHROM` = col_integer(),
+  POS = col_integer()
+)
+See spec(...) for full column specifications.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zZXJ0aW9uPC0gcmVhZF9kZWxpbShcInZjZl9pbnNlcnRpb25fYWxsLnR4dFwiLCBcIlxcdFwiLCBlc2NhcGVfZG91YmxlID0gRkFMU0UsIHRyaW1fd3MgPSBUUlVFKVxuYGBgIn0= -->
+<pre class="r"><code>insertion&lt;- read_delim(&quot;vcf_insertion_all.txt&quot;, &quot;\t&quot;, escape_double = FALSE, trim_ws = TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICAuZGVmYXVsdCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYCNDSFJPTWAgPSBjb2xfaW50ZWdlcigpLFxuICBQT1MgPSBjb2xfaW50ZWdlcigpXG4pXG5TZWUgc3BlYyguLi4pIGZvciBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9ucy5cbiJ9 -->
+<pre><code>Parsed with column specification:
+cols(
+  .default = col_character(),
+  `#CHROM` = col_integer(),
+  POS = col_integer()
+)
+See spec(...) for full column specifications.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2QoXCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXJcIilcbmBgYCJ9 -->
+<pre class="r"><code>setwd(&quot;~/Box Sync/Landrace/workdir&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy90amFtYW5uL0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIgaW5zaWRlIGEgbm90ZWJvb2sgY2h1bmsuIFRoZSB3b3JraW5nIGRpcmVjdG9yeSB3aWxsIGJlIHJlc2V0IHdoZW4gdGhlIGNodW5rIGlzIGZpbmlzaGVkIHJ1bm5pbmcuIFVzZSB0aGUga25pdHIgcm9vdC5kaXIgb3B0aW9uIGluIHRoZSBzZXR1cCBjaHVuayB0byBjaGFuZ2UgdGhlIHRoZSB3b3JraW5nIGRpcmVjdG9yeSBmb3Igbm90ZWJvb2sgY2h1bmtzLlxuIn0= -->
+<pre><code>The working directory was changed to /Users/tjamann/Box Sync/Landrace/workdir inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the the working directory for notebook chunks.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVyZ2VkIDwtIG1lcmdlKGFtcGxpc2VxLCBpbnNlcnRpb24sIGJ5PVwiI0NIUk9NXCIpXG53cml0ZV9jc3YobWVyZ2VkLCBcIm1hZXJnZWRyLmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>merged &lt;- merge(ampliseq, insertion, by=&quot;#CHROM&quot;)
+write_csv(merged, &quot;maergedr.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpHZXR0aW5nIGluc2VydCBkYXRhIGZvcm1hdHRlZCBmb3IgVEFTU0VMLSB3b3JrcyB3aXRoIFZDRiBub3QgSEFQTUFQLgoKYGBge3J9CnNldHdkKCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIiKQpsaWJyYXJ5KCJyZXNoYXBlMiIsIGxpYi5sb2M9Ii9MaWJyYXJ5L0ZyYW1ld29ya3MvUi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4zL1Jlc291cmNlcy9saWJyYXJ5IikKbGlicmFyeShwbHlyKQpsaWJyYXJ5KHN0cmluZ3IpCmluc2VydCA8LSByZWFkLmNzdigiSW5zZXJ0aW9uX2RhdGEuY3N2IikKYGBgCgpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ21kK09wdGlvbitJKi4KYGBge3J9Cmluc2VydDEgPC0gaW5zZXJ0WyxjKDMsMTE6MTUsMTc6MjEpXQppbnNlcnRtZWx0IDwtIG1lbHQoaW5zZXJ0MSwgaWQ9YygiQ09MTEVDVElPTiIpKQppbnNlcnRtZWx0IDwtIHJlbmFtZShpbnNlcnRtZWx0LCBjKCJ2YWx1ZSI9Imdlbm90eXBlIikpCmluc2VydG1lbHQgPC0gcmVuYW1lKGluc2VydG1lbHQsIGMoInZhcmlhYmxlIj0ibG9jdXMiKSkKaW5zZXJ0bWVsdCRwbGFudF9pZCA8LSBzdHJfc3ViKGluc2VydG1lbHQkbG9jdXMsIC0xLCAtMSkKaW5zZXJ0bWVsdCRzYW1wbGVfaWQgPC0gcGFzdGUoaW5zZXJ0bWVsdCRDT0xMRUNUSU9OLCAiXyIsIGluc2VydG1lbHQkcGxhbnRfaWQpCmluc2VydG1lbHQgPC0gaW5zZXJ0bWVsdFssYygxLDIsMyw1KV0KYGBgCgpzdWJzZXQgYnkgbG9jdXMKYGBge3J9CkNBQ1RBIDwtIGluc2VydG1lbHRbZ3JlcCgiQ0FDVEEiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXQpDQUNUQSA8LSByZW5hbWUoQ0FDVEEsIGMoImdlbm90eXBlIj0iQ0FDVEEiKSkKTUlURSA8LSBpbnNlcnRtZWx0W2dyZXAoIk1JVEUiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXQpNSVRFIDwtIHJlbmFtZShNSVRFLCBjKCJnZW5vdHlwZSI9Ik1JVEUiKSkKaGFwIDwtIG1lcmdlKENBQ1RBLCBNSVRFLCBieT0ic2FtcGxlX2lkIikKaGFwIDwtIGhhcFssYygxLDQsNyldCmhhcCA8LSBuYS5vbWl0KGhhcCkKYGBgCgoKYGBge3J9CmhhcCRDQUNUQSA8LSBnc3ViKCItMSIsICIuLy4iLCBoYXAkQ0FDVEEpCmhhcCRNSVRFIDwtIGdzdWIoIi0xIiwgIi4vLiIsIGhhcCRNSVRFKQpoYXAkQ0FDVEEgPC0gZ3N1YigiMSIsICIxLzAiLCBoYXAkQ0FDVEEpCmhhcCRDQUNUQSA8LSBnc3ViKCIyIiwgIjEvMSIsIGhhcCRDQUNUQSkKaGFwJENBQ1RBIDwtIGdzdWIoIjAiLCAiMC8wIiwgaGFwJENBQ1RBKQpoYXAkTUlURSA8LSBnc3ViKCIxIiwgIjEvMCIsIGhhcCRNSVRFKQpoYXAkTUlURSA8LSBnc3ViKCIyIiwgIjEvMSIsIGhhcCRNSVRFKQpoYXAkTUlURSA8LSBnc3ViKCIwIiwgIjAvMCIsIGhhcCRNSVRFKQoKCmBgYAoKCmBgYHtyfQpoZWFkZXIgPC0gYygnYWxsZWxlcycsICdjaHJvbScsICdwb3MnLCAnc3RyYW5kJywgJ2Fzc2VtYmx5IycsICdjZW50ZXInLCAncHJvdExTSUQnLCAnYXNzYXlMU0lEJywgJ3BhbmVsJywgJ1FDY29kZScpCmhlYWRlciA8LSBhcy5kYXRhLmZyYW1lKGhlYWRlcikKaGVhZGVyJENBQ1RBIDwtICIiCmhlYWRlciRNSVRFIDwtICIiCmhlYWRlciA8LSByZW5hbWUoaGVhZGVyLCBjKCJoZWFkZXIiPSJzYW1wbGVfaWQiKSkKaGFwbSA8LSByYmluZChoZWFkZXIsIGhhcCkKaGFwbSA8LSByZW5hbWUoaGFwbSwgYygic2FtcGxlX2lkIj0icnMiKSkKYGBgCgp0cmFuc3Bvc2UKYGBge3J9CmhhcG1hcCA8LSB0KGhhcG0pCmhhcG1hcCA8LSBhcy5kYXRhLmZyYW1lKGhhcG1hcCkKY29sbmFtZXMoaGFwbWFwKSA9IGhhcG1hcFsxLCBdCiNoYXBtYXAgPSBoYXBtYXBbLTEsIF0KYGBgCgoKCmBgYHtyfQojd3JpdGUudGFibGUoaGFwbWFwLCBmaWxlPSJoYXBtYXBfbGV0dGVycy50eHQiLCBzZXAgPSAiXHQiKQpgYGAKCgoKCmZvciB2Y2YtIFRISVMgV09SS0VEIEZPUiBJTlBVVCBJTlRPIFRBU1NFTCEgCgpgYGB7cn0KaGVhZGVydmNmIDwtIGMoJ0NIUk9NJywgJ1BPUycsICdJRCcsICdSRUYnLCAnQUxUJywgJ1FVQUwnLCAnRklMVEVSJywgJ0lORk8nLCAnRk9STUFUJykKaGVhZGVydmNmIDwtIGFzLmRhdGEuZnJhbWUoaGVhZGVydmNmKQpoZWFkZXJ2Y2YkQ0FDVEEgPC0gIiIKaGVhZGVydmNmJE1JVEUgPC0gIiIKaGVhZGVydmNmIDwtIHJlbmFtZShoZWFkZXJ2Y2YsIGMoImhlYWRlcnZjZiI9InNhbXBsZV9pZCIpKQp2Y2YgPC0gcmJpbmQoaGVhZGVydmNmLCBoYXApCnZjZiA8LSByZW5hbWUodmNmLCBjKCJzYW1wbGVfaWQiPSJJRCIpKQpgYGAKCnRyYW5zcG9zZQpgYGB7cn0KdmNmZmlsZSA8LSB0KHZjZikKdmNmZmlsZSA8LSBhcy5kYXRhLmZyYW1lKHZjZmZpbGUpCmNvbG5hbWVzKHZjZmZpbGUpID0gdmNmZmlsZVsxLCBdCiNoYXBtYXAgPSBoYXBtYXBbLTEsIF0KYGBgCgoKCmBgYHtyfQp3cml0ZS50YWJsZSh2Y2ZmaWxlLCBmaWxlPSJ2Y2ZmaWxlX2xldHRlcnMudHh0Iiwgc2VwID0gIlx0IikKYGBgCmBgYAoKCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ21kK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpHZXR0aW5nIGluc2VydCBkYXRhIGZvcm1hdHRlZCBmb3IgVEFTU0VMLSB3b3JrcyB3aXRoIFZDRiBub3QgSEFQTUFQLgoKYGBge3J9CnNldHdkKCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIiKQpsaWJyYXJ5KCJyZXNoYXBlMiIsIGxpYi5sb2M9Ii9MaWJyYXJ5L0ZyYW1ld29ya3MvUi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4zL1Jlc291cmNlcy9saWJyYXJ5IikKbGlicmFyeShwbHlyKQpsaWJyYXJ5KHN0cmluZ3IpCmluc2VydCA8LSByZWFkLmNzdigiSW5zZXJ0aW9uX2RhdGFfdGVvLmNzdiIpCmBgYAoKQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkNtZCtPcHRpb24rSSouCmBgYHtyfQppbnNlcnQxIDwtIGluc2VydFssYygzLDU6MjQpXQppbnNlcnRtZWx0IDwtIG1lbHQoaW5zZXJ0MSwgaWQ9YygiQ09MTEVDVElPTiIpKQppbnNlcnRtZWx0IDwtIHJlbmFtZShpbnNlcnRtZWx0LCBjKCJ2YWx1ZSI9Imdlbm90eXBlIikpCmluc2VydG1lbHQgPC0gcmVuYW1lKGluc2VydG1lbHQsIGMoInZhcmlhYmxlIj0ibG9jdXMiKSkKaW5zZXJ0bWVsdCA8LSBpbnNlcnRtZWx0W2NvbXBsZXRlLmNhc2VzKGluc2VydG1lbHQpLF0KaW5zZXJ0bWVsdCRwbGFudF9pZCA8LSBzdHJfc3ViKGluc2VydG1lbHQkbG9jdXMsIC0xLCAtMSkKaW5zZXJ0bWVsdCRzYW1wbGVfaWQgPC0gcGFzdGUoaW5zZXJ0bWVsdCRDT0xMRUNUSU9OLCAiXyIsIGluc2VydG1lbHQkcGxhbnRfaWQpCmluc2VydG1lbHQgPC0gaW5zZXJ0bWVsdFssYygxLDIsMyw1KV0KYGBgCgpzdWJzZXQgYnkgbG9jdXMKYGBge3J9CkNBQ1RBIDwtIGluc2VydG1lbHRbZ3JlcCgiQ0FDVEEiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXQpDQUNUQSA8LSByZW5hbWUoQ0FDVEEsIGMoImdlbm90eXBlIj0iQ0FDVEEiKSkKTUlURSA8LSBpbnNlcnRtZWx0W2dyZXAoIk1JVEUiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXQpNSVRFIDwtIHJlbmFtZShNSVRFLCBjKCJnZW5vdHlwZSI9Ik1JVEUiKSkKaGFwIDwtIG1lcmdlKENBQ1RBLCBNSVRFLCBieT0ic2FtcGxlX2lkIikKaGFwIDwtIGhhcFssYygxLDQsNyldCmhhcCA8LSBuYS5vbWl0KGhhcCkKYGBgCgoKYGBge3J9CmhhcCRDQUNUQSA8LSBnc3ViKCItMSIsICIuLy4iLCBoYXAkQ0FDVEEpCmhhcCRNSVRFIDwtIGdzdWIoIi0xIiwgIi4vLiIsIGhhcCRNSVRFKQpoYXAkQ0FDVEEgPC0gZ3N1YigiMCIsICIwLzAiLCBoYXAkQ0FDVEEpCmhhcCRDQUNUQSA8LSBnc3ViKCIxIiwgIjEvMCIsIGhhcCRDQUNUQSkKaGFwJENBQ1RBIDwtIGdzdWIoIjIiLCAiMS8xIiwgaGFwJENBQ1RBKQpoYXAkTUlURSA8LSBnc3ViKCIwIiwgIjAvMCIsIGhhcCRNSVRFKQpoYXAkTUlURSA8LSBnc3ViKCIxIiwgIjEvMCIsIGhhcCRNSVRFKQpoYXAkTUlURSA8LSBnc3ViKCIyIiwgIjEvMSIsIGhhcCRNSVRFKQoKYGBgCgoKZm9yIGhhcG1hcAoKaGVhZGVyIDwtIGMoJ2FsbGVsZXMnLCAnY2hyb20nLCAncG9zJywgJ3N0cmFuZCcsICdhc3NlbWJseSMnLCAnY2VudGVyJywgJ3Byb3RMU0lEJywgJ2Fzc2F5TFNJRCcsICdwYW5lbCcsICdRQ2NvZGUnKQpoZWFkZXIgPC0gYXMuZGF0YS5mcmFtZShoZWFkZXIpCmhlYWRlciRDQUNUQSA8LSAiIgpoZWFkZXIkTUlURSA8LSAiIgpoZWFkZXIgPC0gcmVuYW1lKGhlYWRlciwgYygiaGVhZGVyIj0ic2FtcGxlX2lkIikpCmhhcG0gPC0gcmJpbmQoaGVhZGVyLCBoYXApCmhhcG0gPC0gcmVuYW1lKGhhcG0sIGMoInNhbXBsZV9pZCI9InJzIikpCmhhcG1hcCA8LSB0KGhhcG0pCmhhcG1hcCA8LSBhcy5kYXRhLmZyYW1lKGhhcG1hcCkKY29sbmFtZXMoaGFwbWFwKSA9IGhhcG1hcFsxLCBdCiNoYXBtYXAgPSBoYXBtYXBbLTEsIF0KCgoKCmBgYHtyfQojd3JpdGUudGFibGUoaGFwbWFwLCBmaWxlPSJoYXBtYXBfbGV0dGVycy50eHQiLCBzZXAgPSAiXHQiKQpgYGAKCgoKCmZvciB2Y2YtIFRISVMgV09SS0VEIEZPUiBJTlBVVCBJTlRPIFRBU1NFTCEgCgpgYGB7cn0KaGVhZGVydmNmIDwtIGMoJyNDSFJPTScsICdQT1MnLCAnSUQnLCAnUkVGJywgJ0FMVCcsICdRVUFMJywgJ0ZJTFRFUicsICdJTkZPJywgJ0ZPUk1BVCcpCmhlYWRlcnZjZiA8LSBhcy5kYXRhLmZyYW1lKGhlYWRlcnZjZikKaGVhZGVydmNmJENBQ1RBIDwtICIiCmhlYWRlcnZjZiRNSVRFIDwtICIiCmhlYWRlcnZjZiA8LSByZW5hbWUoaGVhZGVydmNmLCBjKCJoZWFkZXJ2Y2YiPSJzYW1wbGVfaWQiKSkKdmNmIDwtIHJiaW5kKGhlYWRlcnZjZiwgaGFwKQp2Y2YgPC0gcmVuYW1lKHZjZiwgYygic2FtcGxlX2lkIj0iSUQiKSkKYGBgCgp0cmFuc3Bvc2UKYGBge3J9CnZjZmZpbGUgPC0gdCh2Y2YpCnZjZmZpbGUgPC0gYXMuZGF0YS5mcmFtZSh2Y2ZmaWxlKQpjb2xuYW1lcyh2Y2ZmaWxlKSA9IHZjZmZpbGVbMSwgXQojaGFwbWFwID0gaGFwbWFwWy0xLCBdCmBgYAoKCgpgYGB7cn0Kc2V0d2QoIn4vQm94IFN5bmMvTGFuZHJhY2Uvd29ya2RpciIpCndyaXRlLnRhYmxlKHZjZmZpbGUsIGZpbGU9InZjZmZpbGVfdGVvcy50eHQiLCBzZXAgPSAiXHQiKQpgYGAKCmZvciB0aGUgbGFuZHJhY2UgZGF0YToKYGBge3J9CnNldHdkKCJ+L0JveCBTeW5jL0xhbmRyYWNlL3dvcmtkaXIiKQpsaWJyYXJ5KCJyZXNoYXBlMiIsIGxpYi5sb2M9Ii9MaWJyYXJ5L0ZyYW1ld29ya3MvUi5mcmFtZXdvcmsvVmVyc2lvbnMvMy4zL1Jlc291cmNlcy9saWJyYXJ5IikKbGlicmFyeShwbHlyKQpsaWJyYXJ5KHN0cmluZ3IpCmluc2VydCA8LSByZWFkLmNzdigiSW5zZXJ0aW9uX2RhdGEuY3N2IikKYGBgCgoKYGBge3J9Cmluc2VydDEgPC0gaW5zZXJ0WyxjKDMsMTE6MTUsMTc6MjEpXQppbnNlcnRtZWx0IDwtIG1lbHQoaW5zZXJ0MSwgaWQ9YygiQ09MTEVDVElPTiIpKQppbnNlcnRtZWx0IDwtIHJlbmFtZShpbnNlcnRtZWx0LCBjKCJ2YWx1ZSI9Imdlbm90eXBlIikpCmluc2VydG1lbHQgPC0gcmVuYW1lKGluc2VydG1lbHQsIGMoInZhcmlhYmxlIj0ibG9jdXMiKSkKaW5zZXJ0bWVsdCA8LSBpbnNlcnRtZWx0W2NvbXBsZXRlLmNhc2VzKGluc2VydG1lbHQpLF0KaW5zZXJ0bWVsdCRwbGFudF9pZCA8LSBzdHJfc3ViKGluc2VydG1lbHQkbG9jdXMsIC0xLCAtMSkKaW5zZXJ0bWVsdCRzYW1wbGVfaWQgPC0gcGFzdGUoaW5zZXJ0bWVsdCRDT0xMRUNUSU9OLCAiXyIsIGluc2VydG1lbHQkcGxhbnRfaWQpCmluc2VydG1lbHQgPC0gaW5zZXJ0bWVsdFssYygxLDIsMyw1KV0KYGBgCgpzdWJzZXQgYnkgbG9jdXMKYGBge3J9CkNBQ1RBIDwtIGluc2VydG1lbHRbZ3JlcCgiQ0FDVEEiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXQpDQUNUQSA8LSByZW5hbWUoQ0FDVEEsIGMoImdlbm90eXBlIj0iQ0FDVEEiKSkKTUlURSA8LSBpbnNlcnRtZWx0W2dyZXAoIk1JVEUiLCBpbnNlcnRtZWx0JGxvY3VzKSwgXQpNSVRFIDwtIHJlbmFtZShNSVRFLCBjKCJnZW5vdHlwZSI9Ik1JVEUiKSkKaGFwIDwtIG1lcmdlKENBQ1RBLCBNSVRFLCBieT0ic2FtcGxlX2lkIikKaGFwIDwtIGhhcFssYygxLDQsNyldCmhhcCA8LSBuYS5vbWl0KGhhcCkKYGBgCgoKYGBge3J9CmhhcCRDQUNUQSA8LSBnc3ViKCItMSIsICIuLy4iLCBoYXAkQ0FDVEEpCmhhcCRNSVRFIDwtIGdzdWIoIi0xIiwgIi4vLiIsIGhhcCRNSVRFKQpoYXAkQ0FDVEEgPC0gZ3N1YigiMCIsICIwLzAiLCBoYXAkQ0FDVEEpCmhhcCRDQUNUQSA8LSBnc3ViKCIxIiwgIjEvMCIsIGhhcCRDQUNUQSkKaGFwJENBQ1RBIDwtIGdzdWIoIjIiLCAiMS8xIiwgaGFwJENBQ1RBKQpoYXAkTUlURSA8LSBnc3ViKCIwIiwgIjAvMCIsIGhhcCRNSVRFKQpoYXAkTUlURSA8LSBnc3ViKCIxIiwgIjEvMCIsIGhhcCRNSVRFKQpoYXAkTUlURSA8LSBnc3ViKCIyIiwgIjEvMSIsIGhhcCRNSVRFKQoKYGBgCgoKZm9yIGhhcG1hcAoKaGVhZGVyIDwtIGMoJ2FsbGVsZXMnLCAnY2hyb20nLCAncG9zJywgJ3N0cmFuZCcsICdhc3NlbWJseSMnLCAnY2VudGVyJywgJ3Byb3RMU0lEJywgJ2Fzc2F5TFNJRCcsICdwYW5lbCcsICdRQ2NvZGUnKQpoZWFkZXIgPC0gYXMuZGF0YS5mcmFtZShoZWFkZXIpCmhlYWRlciRDQUNUQSA8LSAiIgpoZWFkZXIkTUlURSA8LSAiIgpoZWFkZXIgPC0gcmVuYW1lKGhlYWRlciwgYygiaGVhZGVyIj0ic2FtcGxlX2lkIikpCmhhcG0gPC0gcmJpbmQoaGVhZGVyLCBoYXApCmhhcG0gPC0gcmVuYW1lKGhhcG0sIGMoInNhbXBsZV9pZCI9InJzIikpCmhhcG1hcCA8LSB0KGhhcG0pCmhhcG1hcCA8LSBhcy5kYXRhLmZyYW1lKGhhcG1hcCkKY29sbmFtZXMoaGFwbWFwKSA9IGhhcG1hcFsxLCBdCiNoYXBtYXAgPSBoYXBtYXBbLTEsIF0KCiN3cml0ZS50YWJsZShoYXBtYXAsIGZpbGU9ImhhcG1hcF9sZXR0ZXJzLnR4dCIsIHNlcCA9ICJcdCIpCgoKCmZvciB2Y2YtIFRISVMgV09SS0VEIEZPUiBJTlBVVCBJTlRPIFRBU1NFTCEgCgpgYGB7cn0KaGVhZGVydmNmIDwtIGMoJyNDSFJPTScsICdQT1MnLCAnSUQnLCAnUkVGJywgJ0FMVCcsICdRVUFMJywgJ0ZJTFRFUicsICdJTkZPJywgJ0ZPUk1BVCcpCmhlYWRlcnZjZiA8LSBhcy5kYXRhLmZyYW1lKGhlYWRlcnZjZikKaGVhZGVydmNmJENBQ1RBIDwtICIiCmhlYWRlcnZjZiRNSVRFIDwtICIiCmhlYWRlcnZjZiA8LSByZW5hbWUoaGVhZGVydmNmLCBjKCJoZWFkZXJ2Y2YiPSJzYW1wbGVfaWQiKSkKdmNmIDwtIHJiaW5kKGhlYWRlcnZjZiwgaGFwKQp2Y2YgPC0gcmVuYW1lKHZjZiwgYygic2FtcGxlX2lkIj0iSUQiKSkKYGBgCgp0cmFuc3Bvc2UKYGBge3J9CnZjZmZpbGUgPC0gdCh2Y2YpCnZjZmZpbGUgPC0gYXMuZGF0YS5mcmFtZSh2Y2ZmaWxlKQpjb2xuYW1lcyh2Y2ZmaWxlKSA9IHZjZmZpbGVbMSwgXQojaGFwbWFwID0gaGFwbWFwWy0xLCBdCmBgYAoKCgpgYGB7cn0Kc2V0d2QoIn4vQm94IFN5bmMvTGFuZHJhY2Uvd29ya2RpciIpCndyaXRlLnRhYmxlKHZjZmZpbGUsIGZpbGU9InZjZmZpbGVfbGFuZHJhY2VzLnR4dCIsIHNlcCA9ICJcdCIpCmBgYAoKCgphZnRlciBmaXggdXAgdGhlIGZpbGVzCmBgYHtyfQpzZXR3ZCgifi9Cb3ggU3luYy9MYW5kcmFjZS93b3JrZGlyIikKbGlicmFyeShyZWFkcikKYW1wbGlzZXEgPC0gcmVhZF9kZWxpbSgic29ydGVkdGFzc2VsX3JlbmFtZTRNYXkudHh0IiwgIlx0IiwgZXNjYXBlX2RvdWJsZSA9IEZBTFNFLCB0cmltX3dzID0gVFJVRSkKaW5zZXJ0aW9uPC0gcmVhZF9kZWxpbSgidmNmX2luc2VydGlvbl9hbGwudHh0IiwgIlx0IiwgZXNjYXBlX2RvdWJsZSA9IEZBTFNFLCB0cmltX3dzID0gVFJVRSkKCmBgYApgYGB7cn0Kc2V0d2QoIn4vQm94IFN5bmMvTGFuZHJhY2Uvd29ya2RpciIpCm1lcmdlZCA8LSBtZXJnZShhbXBsaXNlcSwgaW5zZXJ0aW9uLCBieT0iI0NIUk9NIikKd3JpdGVfY3N2KG1lcmdlZCwgIm1hZXJnZWRyLmNzdiIpCmBgYAoKCg==</div>
 
 
 
@@ -329,7 +466,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
