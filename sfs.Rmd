@@ -1,0 +1,60 @@
+---
+title: "hets"
+author: "TMJ"
+date: "December 22, 2015"
+output: pdf_document
+---
+
+```{bash}
+cd /Users/tjamann/Box Sync/Landrace/workdir
+vcftools --vcf insertion_ampliseq.vcf --keep teos.txt --recode --out insertion_ampliseq_teos_12May
+vcftools --vcf insertion_ampliseq.vcf --remove teos.txt --recode --out insertion_ampliseq_landraces_12May
+vcftools --vcf insertion_ampliseq_landraces_12May.recode.vcf --freq
+mv out.frq landraces.frq
+vcftools --vcf insertion_ampliseq_teos_12May.recode.vcf --freq
+mv out.frq teos.frq
+awk '{gsub(":","\t",$0); print;}' teos.frq > teos.cols.frq
+awk '{gsub(":","\t",$0); print;}' landraces.frq > landraces.cols.frq
+```
+
+
+
+```{r}
+setwd("~/Box Sync/Landrace/workdir")
+library(readr)
+library(plyr)
+af <- read_delim("teos.cols.frq", "\t")
+f2 <- as.data.frame(apply(af, 2, function(y) (gsub("NaN", "NA", y))))
+f2 <- rename(f2, c("FREQ}"="Freq"))
+f2$Freq <- as.numeric(as.character(f2$Freq))
+f2$MAF <- 1-f2$Freq
+f2$pop <- "teos"
+str(f2)
+```
+```{r}
+setwd("~/Box Sync/Landrace/workdir")
+library(readr)
+library(plyr)
+laf <- read_delim("landraces.cols.frq", "\t")
+lf2 <- as.data.frame(apply(laf, 2, function(y) (gsub("NaN", "NA", y))))
+lf2 <- rename(lf2, c("FREQ}"="Freq"))
+lf2$Freq <- as.numeric(as.character(lf2$Freq))
+lf2$MAF <- 1-lf2$Freq
+lf2$pop <- "landraces"
+str(lf2)
+```
+```{r}
+MAFs <- rbind(f2, lf2)
+```
+
+```{r}
+hist(f2$MAF)
+library(ggplot2)
+g <- ggplot(MAFs, aes(MAF, colour=pop)) + geom_density()
+```
+
+```{r}
+setwd("~/Box Sync/Landrace/workdir")
+ggsave("SFS.pdf", plot=g, dpi=300)
+```
+
